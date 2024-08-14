@@ -1,0 +1,42 @@
+:root {
+  --color-text: #1c444b;
+  --color-text-title: #419daf;
+  --color-text-title-hover: #74bdcb;
+  --color-bg: #d8e3ec;
+  --color-bg-light: #f2f6f9;
+  --color-accent: #41af8a;
+
+  font-family: Inter, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+header,
+main {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: var(--color-bg-light);
+}
+
+header,
+main,
+div {
+  box-sizing: border-box;
+}
+
+ul,
+p {
+  margin: 0;
+  padding: 0;
+}
