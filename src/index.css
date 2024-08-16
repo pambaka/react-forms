@@ -2,9 +2,12 @@
   --color-text: #1c444b;
   --color-text-title: #419daf;
   --color-text-title-hover: #74bdcb;
+  --color-text-light: #fff;
   --color-bg: #d8e3ec;
   --color-bg-light: #f2f6f9;
   --color-accent: #41af8a;
+  --color-accent-hover: #38b88d;
+  --color-warning: #ffa384;
 
   font-family: Inter, sans-serif;
   line-height: 1.5;
@@ -39,4 +42,19 @@ ul,
 p {
   margin: 0;
   padding: 0;
+}
+
+button {
+  height: 2rem;
+  border: none;
+  border-radius: 2px;
+  background-color: var(--color-accent);
+  font-size: 1.2rem;
+  color: var(--color-text-light);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background-color: var(--color-accent-hover);
 }

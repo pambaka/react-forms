@@ -1,0 +1,21 @@
+.form {
+  margin: 0 auto;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.error-message {
+  height: 30px;
+  line-height: 1;
+  font-size: 0.8rem;
+  color: var(--color-warning);
+  text-align: left;
+}
