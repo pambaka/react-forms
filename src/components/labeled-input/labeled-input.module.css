@@ -5,9 +5,9 @@
   justify-content: flex-start;
 }
 
-p {
+.label p {
   align-self: flex-start;
-  color: #419daf;
+  color: var(--color-text-title);
 }
 
 input {

@@ -39,9 +39,16 @@ div {
 }
 
 ul,
-p {
+p,
+h2 {
   margin: 0;
   padding: 0;
+}
+
+h2 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--color-accent);
 }
 
 button {
