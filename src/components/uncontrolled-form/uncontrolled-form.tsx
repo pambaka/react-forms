@@ -3,7 +3,7 @@ import { MutableRefObject, ReactNode, useRef, useState } from 'react';
 import validateForm from './validate-form';
 import LabeledInput from '../labeled-input/labeled-input';
 import { useDispatch } from 'react-redux';
-import { addToValidated } from '../../store/uncontrolled-form-slice';
+import { addToUncontrolledFormSlice } from '../../store/uncontrolled-form-slice';
 import { useNavigate } from 'react-router-dom';
 
 function UncontrolledForm(): ReactNode {
@@ -20,11 +20,11 @@ function UncontrolledForm(): ReactNode {
     event.preventDefault();
     const name = nameInput.current?.value;
     const age = ageInput.current?.value;
-    const messages = await validateForm(name, age);
+    const messages = await validateForm({ name, age });
     setNameError(messages.name);
     setAgeError(messages.age);
     if (Object.values(messages).every((value) => value === '')) {
-      dispatch(addToValidated({ user: { name, age } }));
+      dispatch(addToUncontrolledFormSlice({ user: { name, age } }));
       navigate('/');
     }
   };

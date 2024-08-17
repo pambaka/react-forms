@@ -3,15 +3,15 @@ import { User } from '../types';
 
 const initialState: { users: User[] } = { users: [] };
 
-export const uncontrolledFormSlice = createSlice({
-  name: 'uncontrolledForm',
+export const reactHookFormSlice = createSlice({
+  name: 'reactHookFormSlice',
   initialState,
   reducers: {
-    addToUncontrolledFormSlice(state, action: { payload: { user: User } }) {
+    addToReactHookFormSlice(state, action: { payload: { user: User } }) {
       const newUser = action.payload.user;
       state.users = [newUser, ...state.users];
     },
   },
 });
 
-export const { addToUncontrolledFormSlice } = uncontrolledFormSlice.actions;
+export const { addToReactHookFormSlice } = reactHookFormSlice.actions;

@@ -2,17 +2,3 @@
   display: flex;
   gap: 20px;
 }
-
-.uncontrolled-form,
-.react-hook-form {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}

@@ -4,6 +4,9 @@ import { User } from '../../types';
 import React, { ReactNode, useState } from 'react';
 import validateForm from '../uncontrolled-form/validate-form';
 import LabeledInput from './labeled-input';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { addToReactHookFormSlice } from '../../store/react-hook-form-slice';
 
 function ReactHookForm(): ReactNode {
   const [nameError, setNameError] = useState('');
@@ -11,6 +14,9 @@ function ReactHookForm(): ReactNode {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   const { register, getValues } = useForm<User>();
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   async function handleInputChange() {
     const messages = await validateForm(getValues());
@@ -23,7 +29,9 @@ function ReactHookForm(): ReactNode {
 
   function handleButtonClick(event: React.MouseEvent) {
     event.preventDefault();
-    console.log('click');
+    const user = getValues();
+    dispatch(addToReactHookFormSlice({ user }));
+    navigate('/');
   }
 
   return (
