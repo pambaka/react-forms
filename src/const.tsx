@@ -7,4 +7,5 @@ export const LABELS = {
   name: 'Name: ',
   age: 'Age: ',
   email: 'Email: ',
+  gender: 'Gender: ',
 };

@@ -7,11 +7,13 @@ import LabeledInput from './labeled-input';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addToReactHookFormSlice } from '../../store/react-hook-form-slice';
+import GenderPicker from './gender-picker';
 
 function ReactHookForm(): ReactNode {
   const [nameError, setNameError] = useState('');
   const [ageError, setAgeError] = useState('');
   const [emailError, setEmailError] = useState('');
+  const [genderError, setGenderError] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   const { register, getValues } = useForm<User>();
@@ -24,6 +26,7 @@ function ReactHookForm(): ReactNode {
     setNameError(messages.name);
     setAgeError(messages.age);
     setEmailError(messages.email);
+    setGenderError(messages.gender);
 
     if (Object.values(messages).every((message) => message === '')) setIsButtonDisabled(false);
     else setIsButtonDisabled(true);
@@ -32,7 +35,9 @@ function ReactHookForm(): ReactNode {
   function handleButtonClick(event: React.MouseEvent) {
     event.preventDefault();
     const user = getValues();
-    dispatch(addToReactHookFormSlice({ user }));
+    dispatch(
+      addToReactHookFormSlice({ user: { name: user.name, age: user.age, email: user.email, gender: user.gender } }),
+    );
     navigate('/');
   }
 
@@ -41,6 +46,7 @@ function ReactHookForm(): ReactNode {
       <LabeledInput field="name" onChange={handleInputChange} register={register} errorMessage={nameError} />
       <LabeledInput field="age" onChange={handleInputChange} register={register} errorMessage={ageError} />
       <LabeledInput field="email" onChange={handleInputChange} register={register} errorMessage={emailError} />
+      <GenderPicker onChange={handleInputChange} register={register} errorMessage={genderError} />
       <button type="submit" onClick={handleButtonClick} disabled={isButtonDisabled}>
         Submit
       </button>

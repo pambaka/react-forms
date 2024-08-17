@@ -10,6 +10,7 @@ const userSchema = Yup.object({
     .positive('Age should be a positive number')
     .integer('Age should be an integer number'),
   email: Yup.string().required('Email is required').email('Please enter a valid email address'),
+  gender: Yup.string().required('Choose a gender'),
 });
 
 export default userSchema;

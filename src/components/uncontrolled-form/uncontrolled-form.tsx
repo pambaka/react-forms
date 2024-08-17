@@ -11,10 +11,18 @@ function UncontrolledForm(): ReactNode {
   const nameInput: MutableRefObject<HTMLInputElement | null> = useRef(null);
   const ageInput: MutableRefObject<HTMLInputElement | null> = useRef(null);
   const emailInput: MutableRefObject<HTMLInputElement | null> = useRef(null);
+  const genderInput: {
+    male: MutableRefObject<HTMLInputElement | null>;
+    female: MutableRefObject<HTMLInputElement | null>;
+  } = {
+    male: useRef(null),
+    female: useRef(null),
+  };
 
   const [nameError, setNameError] = useState('');
   const [ageError, setAgeError] = useState('');
   const [emailError, setEmailError] = useState('');
+  const [genderError, setGenderError] = useState('');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,12 +32,16 @@ function UncontrolledForm(): ReactNode {
     const name = nameInput.current?.value ?? '';
     const age = ageInput.current?.value ?? '';
     const email = emailInput.current?.value ?? '';
-    const messages = await validateForm({ name, age, email });
+    const isMale = genderInput.male.current?.checked;
+    const isFemale = genderInput.female.current?.checked;
+    const gender = isMale ? 'male' : isFemale ? 'female' : '';
+    const messages = await validateForm({ name, age, email, gender });
     setNameError(messages.name);
     setAgeError(messages.age);
     setEmailError(messages.email);
+    setGenderError(messages.gender);
     if (Object.values(messages).every((value) => value === '')) {
-      dispatch(addToUncontrolledFormSlice({ user: { name, age, email } }));
+      dispatch(addToUncontrolledFormSlice({ user: { name, age, email, gender } }));
       navigate('/');
     }
   };
@@ -47,6 +59,20 @@ function UncontrolledForm(): ReactNode {
       <div>
         <LabeledInput labelText={LABELS.email} inputType="text" refInput={emailInput} />
         <p className={styles['error-message']}>{emailError}</p>
+      </div>
+      <div>
+        <div className={styles.gender}>
+          <p>{LABELS.gender}</p>
+          <label>
+            <input type="radio" name="gender" value="male" ref={genderInput.male} />
+            <p>Male</p>
+          </label>
+          <label>
+            <input type="radio" name="gender" value="female" ref={genderInput.female} />
+            <p>Female</p>
+          </label>
+        </div>
+        <p className={styles['error-message']}>{genderError}</p>
       </div>
       <button type="submit" onClick={(event: React.MouseEvent) => void (async () => await handleForm(event))()}>
         Submit
