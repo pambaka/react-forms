@@ -1,6 +1,7 @@
 export interface User {
-  name: string | undefined;
-  age: string | undefined;
+  name: string;
+  age: string;
+  email: string;
 }
 
 export type UserFields = keyof User;
