@@ -8,12 +8,14 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addToReactHookFormSlice } from '../../store/react-hook-form-slice';
 import GenderPicker from './gender-picker';
+import { LABELS } from '../../const';
 
 function ReactHookForm(): ReactNode {
   const [nameError, setNameError] = useState('');
   const [ageError, setAgeError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [genderError, setGenderError] = useState('');
+  const [tAndCError, setTAndCError] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   const { register, getValues } = useForm<User>();
@@ -27,6 +29,7 @@ function ReactHookForm(): ReactNode {
     setAgeError(messages.age);
     setEmailError(messages.email);
     setGenderError(messages.gender);
+    setTAndCError(messages.isTCAccepted);
 
     if (Object.values(messages).every((message) => message === '')) setIsButtonDisabled(false);
     else setIsButtonDisabled(true);
@@ -36,7 +39,15 @@ function ReactHookForm(): ReactNode {
     event.preventDefault();
     const user = getValues();
     dispatch(
-      addToReactHookFormSlice({ user: { name: user.name, age: user.age, email: user.email, gender: user.gender } }),
+      addToReactHookFormSlice({
+        user: {
+          name: user.name,
+          age: user.age,
+          email: user.email,
+          gender: user.gender,
+          isTCAccepted: user.isTCAccepted,
+        },
+      }),
     );
     navigate('/');
   }
@@ -47,6 +58,16 @@ function ReactHookForm(): ReactNode {
       <LabeledInput field="age" onChange={handleInputChange} register={register} errorMessage={ageError} />
       <LabeledInput field="email" onChange={handleInputChange} register={register} errorMessage={emailError} />
       <GenderPicker onChange={handleInputChange} register={register} errorMessage={genderError} />
+      <div className={styles['t-and-c']}>
+        <label>
+          <input
+            type="checkbox"
+            {...register('isTCAccepted', { onChange: () => void (async () => await handleInputChange())() })}
+          />
+          {LABELS.isTCAccepted}
+        </label>
+        <p className={styles['error-message']}>{tAndCError}</p>
+      </div>
       <button type="submit" onClick={handleButtonClick} disabled={isButtonDisabled}>
         Submit
       </button>

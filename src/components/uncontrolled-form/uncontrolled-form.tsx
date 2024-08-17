@@ -18,11 +18,13 @@ function UncontrolledForm(): ReactNode {
     male: useRef(null),
     female: useRef(null),
   };
+  const tAndCInput: MutableRefObject<HTMLInputElement | null> = useRef(null);
 
   const [nameError, setNameError] = useState('');
   const [ageError, setAgeError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [genderError, setGenderError] = useState('');
+  const [tAndCError, setTAndCError] = useState('');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,13 +37,21 @@ function UncontrolledForm(): ReactNode {
     const isMale = genderInput.male.current?.checked;
     const isFemale = genderInput.female.current?.checked;
     const gender = isMale ? 'male' : isFemale ? 'female' : '';
-    const messages = await validateForm({ name, age, email, gender });
+    const isTCAccepted = tAndCInput.current?.checked ?? false;
+    const messages = await validateForm({
+      name,
+      age,
+      email,
+      gender,
+      isTCAccepted,
+    });
     setNameError(messages.name);
     setAgeError(messages.age);
     setEmailError(messages.email);
     setGenderError(messages.gender);
+    setTAndCError(messages.isTCAccepted);
     if (Object.values(messages).every((value) => value === '')) {
-      dispatch(addToUncontrolledFormSlice({ user: { name, age, email, gender } }));
+      dispatch(addToUncontrolledFormSlice({ user: { name, age, email, gender, isTCAccepted } }));
       navigate('/');
     }
   };
@@ -74,6 +84,14 @@ function UncontrolledForm(): ReactNode {
         </div>
         <p className={styles['error-message']}>{genderError}</p>
       </div>
+      <div className={styles['t-and-c']}>
+        <label>
+          <input type="checkbox" ref={tAndCInput} />
+          {LABELS.isTCAccepted}
+        </label>
+        <p className={styles['error-message']}>{tAndCError}</p>
+      </div>
+
       <button type="submit" onClick={(event: React.MouseEvent) => void (async () => await handleForm(event))()}>
         Submit
       </button>

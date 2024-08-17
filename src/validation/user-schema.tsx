@@ -11,6 +11,7 @@ const userSchema = Yup.object({
     .integer('Age should be an integer number'),
   email: Yup.string().required('Email is required').email('Please enter a valid email address'),
   gender: Yup.string().required('Choose a gender'),
+  isTCAccepted: Yup.boolean().isTrue('Please accept the Terms and Conditions agreement'),
 });
 
 export default userSchema;

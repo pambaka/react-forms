@@ -13,7 +13,7 @@ function Cards({ slice }: { slice: StoreSlice }): ReactNode {
     <div className={styles.card} key={(i += 1)}>
       {Object.entries(user).map(([key, value]) => (
         <p key={key}>
-          {key}: <span>{value}</span>
+          {key}: <span>{String(value)}</span>
         </p>
       ))}
     </div>

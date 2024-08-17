@@ -32,3 +32,11 @@ div.gender {
   align-items: center;
   gap: 5px;
 }
+
+.t-and-c {
+  color: var(--color-text-title);
+
+  label {
+    display: flex;
+  }
+}

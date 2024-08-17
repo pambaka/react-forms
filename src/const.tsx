@@ -8,4 +8,5 @@ export const LABELS = {
   age: 'Age: ',
   email: 'Email: ',
   gender: 'Gender: ',
+  isTCAccepted: 'Accept Terms and Conditions agreement',
 };
