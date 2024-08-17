@@ -17,3 +17,11 @@ input {
   outline-color: var(--color-text-title);
   color: inherit;
 }
+
+.error-message {
+  height: 30px;
+  line-height: 1;
+  font-size: 0.8rem;
+  color: var(--color-warning);
+  text-align: left;
+}

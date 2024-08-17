@@ -4,6 +4,7 @@ import MainPage from './components/main-page/main-page';
 import Header from './components/header/header';
 import { PATH } from './const';
 import UncontrolledForm from './components/uncontrolled-form/uncontrolled-form';
+import ReactHookForm from './components/react-hook-form/react-hook-form';
 
 function App() {
   return (
@@ -19,7 +20,14 @@ function App() {
             </main>
           }
         />
-        <Route path={PATH.reactHookForm} element={<main>Form 2</main>} />
+        <Route
+          path={PATH.reactHookForm}
+          element={
+            <main>
+              <ReactHookForm />
+            </main>
+          }
+        />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>
