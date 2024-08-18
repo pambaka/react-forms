@@ -1,10 +1,10 @@
 import styles from './cards.module.css';
 import { useSelector } from 'react-redux';
 import { SliceUser } from '../../types';
-import { StoreRootState, StoreSlice } from '../../store/store';
+import { StoreFormSlice, StoreRootState } from '../../store/store';
 import { ReactNode } from 'react';
 
-function Cards({ slice }: { slice: StoreSlice }): ReactNode {
+function Cards({ slice }: { slice: StoreFormSlice }): ReactNode {
   const users = useSelector<StoreRootState, SliceUser[]>((state) => state[slice].users);
 
   let i = 0;

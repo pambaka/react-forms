@@ -3,6 +3,7 @@ export interface User {
   age: string;
   email: string;
   gender: string;
+  country: string;
   image: FileList | null | undefined;
   isTCAccepted: boolean;
 }
@@ -14,5 +15,6 @@ export interface SliceUser {
   age: string;
   email: string;
   gender: string;
+  country: string;
   image: string;
 }

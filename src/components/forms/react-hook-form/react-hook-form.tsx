@@ -10,14 +10,16 @@ import { addToReactHookFormSlice } from '../../../store/react-hook-form-slice';
 import GenderPicker from './gender-picker';
 import { LABELS } from '../../../const';
 import getBase64String from '../../../utils/get-base64-string';
+import CountryPicker from '../country-picker';
 
 function ReactHookForm(): ReactNode {
   const [nameError, setNameError] = useState('');
   const [ageError, setAgeError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [genderError, setGenderError] = useState('');
-  const [tAndCError, setTAndCError] = useState('');
+  const [countryError, setCountryError] = useState('');
   const [imageError, setImageError] = useState('');
+  const [tAndCError, setTAndCError] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   const { register, getValues } = useForm<User>();
@@ -31,6 +33,7 @@ function ReactHookForm(): ReactNode {
     setAgeError(messages.age);
     setEmailError(messages.email);
     setGenderError(messages.gender);
+    setCountryError(messages.country);
     setImageError(messages.image);
     setTAndCError(messages.isTCAccepted);
 
@@ -47,7 +50,14 @@ function ReactHookForm(): ReactNode {
 
     dispatch(
       addToReactHookFormSlice({
-        user: { name: user.name, age: user.age, email: user.email, gender: user.gender, image: imageBase64Str },
+        user: {
+          name: user.name,
+          age: user.age,
+          email: user.email,
+          gender: user.gender,
+          country: user.country,
+          image: imageBase64Str,
+        },
       }),
     );
     navigate('/');
@@ -59,6 +69,7 @@ function ReactHookForm(): ReactNode {
       <LabeledInput field="age" onChange={handleInputChange} register={register} errorMessage={ageError} />
       <LabeledInput field="email" onChange={handleInputChange} register={register} errorMessage={emailError} />
       <GenderPicker onChange={handleInputChange} register={register} errorMessage={genderError} />
+      <CountryPicker reactHookForm={{ register, onChange: handleInputChange, errorMessage: countryError }} />
       <div>
         <label>
           <p>{LABELS.image}</p>

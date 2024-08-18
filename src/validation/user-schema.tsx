@@ -1,7 +1,10 @@
 import * as Yup from 'yup';
+import getCountries from '../utils/get-countries';
 
 const maxImageSize = 512000;
 const allowedMimeTypes = ['image/png', 'image/jpeg'];
+
+const countries = await getCountries();
 
 const userSchema = Yup.object({
   name: Yup.string()
@@ -14,6 +17,11 @@ const userSchema = Yup.object({
     .integer('Age should be an integer number'),
   email: Yup.string().required('Email is required').email('Please enter a valid email address'),
   gender: Yup.string().required('Choose a gender'),
+  country: Yup.string()
+    .required('Choose a country')
+    .test('Country is in the list', 'Please choose country from the list', (country) => {
+      return countries.includes(country);
+    }),
   image: Yup.mixed()
     .required('Please upload an image')
     .test('Is valid type', 'Image type should be .png or .jpeg', (filesList) => {

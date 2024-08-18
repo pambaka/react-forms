@@ -1,9 +1,9 @@
 import styles from './cards-column.module.css';
 import { ReactNode } from 'react';
-import { StoreSlice } from '../../store/store';
+import { StoreFormSlice } from '../../store/store';
 import Cards from '../cards/cards';
 
-function CardsColumn({ title, slice }: { title: string; slice: StoreSlice }): ReactNode {
+function CardsColumn({ title, slice }: { title: string; slice: StoreFormSlice }): ReactNode {
   return (
     <section className={styles['cards-column']}>
       <h2>{title}</h2>

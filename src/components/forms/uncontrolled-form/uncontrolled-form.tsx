@@ -7,6 +7,7 @@ import { addToUncontrolledFormSlice } from '../../../store/uncontrolled-form-sli
 import { useNavigate } from 'react-router-dom';
 import { LABELS } from '../../../const';
 import getBase64String from '../../../utils/get-base64-string';
+import CountryPicker from '../country-picker';
 
 function UncontrolledForm(): ReactNode {
   const nameInput: MutableRefObject<HTMLInputElement | null> = useRef(null);
@@ -19,6 +20,7 @@ function UncontrolledForm(): ReactNode {
     male: useRef(null),
     female: useRef(null),
   };
+  const countryInput: MutableRefObject<HTMLInputElement | null> = useRef(null);
   const imageInput: MutableRefObject<HTMLInputElement | null> = useRef(null);
   const tAndCInput: MutableRefObject<HTMLInputElement | null> = useRef(null);
 
@@ -26,6 +28,7 @@ function UncontrolledForm(): ReactNode {
   const [ageError, setAgeError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [genderError, setGenderError] = useState('');
+  const [countryError, setCountryError] = useState('');
   const [imageError, setImageError] = useState('');
   const [tAndCError, setTAndCError] = useState('');
 
@@ -40,18 +43,20 @@ function UncontrolledForm(): ReactNode {
     const isMale = genderInput.male.current?.checked;
     const isFemale = genderInput.female.current?.checked;
     const gender = isMale ? 'male' : isFemale ? 'female' : '';
+    const country = countryInput.current?.value ?? '';
     const image = imageInput.current?.files;
     const imageBase64Str = await getBase64String(image);
     const isTCAccepted = tAndCInput.current?.checked ?? false;
-    const messages = await validateForm({ name, age, email, gender, image, isTCAccepted });
+    const messages = await validateForm({ name, age, email, gender, country, image, isTCAccepted });
     setNameError(messages.name);
     setAgeError(messages.age);
     setEmailError(messages.email);
     setGenderError(messages.gender);
+    setCountryError(messages.country);
     setImageError(messages.image);
     setTAndCError(messages.isTCAccepted);
     if (Object.values(messages).every((value) => value === '')) {
-      dispatch(addToUncontrolledFormSlice({ user: { name, age, email, gender, image: imageBase64Str } }));
+      dispatch(addToUncontrolledFormSlice({ user: { name, age, email, gender, country, image: imageBase64Str } }));
       navigate('/');
     }
   };
@@ -84,6 +89,7 @@ function UncontrolledForm(): ReactNode {
         </div>
         <p className={styles['error-message']}>{genderError}</p>
       </div>
+      <CountryPicker uncontrolledForm={{ ref: countryInput, errorMessage: countryError }} />
       <div>
         <label className={styles.label}>
           <p>{LABELS.image}</p>
