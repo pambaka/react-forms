@@ -3,18 +3,23 @@ import { MutableRefObject, ReactNode } from 'react';
 
 function LabeledInput({
   labelText,
-  inputType,
+  inputType = 'text',
   refInput,
+  errorMessage,
 }: {
   labelText: string;
-  inputType: 'text' | 'number' | 'password';
+  inputType?: 'text' | 'number' | 'password';
   refInput?: MutableRefObject<HTMLInputElement | null>;
+  errorMessage: string;
 }): ReactNode {
   return (
-    <label className={styles.label}>
-      <p>{labelText}</p>
-      <input type={inputType} ref={refInput}></input>
-    </label>
+    <div>
+      <label className={styles.label}>
+        <p>{labelText}</p>
+        <input type={inputType} ref={refInput}></input>
+      </label>
+      <p className={styles['error-message']}>{errorMessage}</p>
+    </div>
   );
 }
 

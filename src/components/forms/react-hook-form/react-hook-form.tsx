@@ -12,6 +12,7 @@ import { LABELS } from '../../../const';
 import getBase64String from '../../../utils/get-base64-string';
 import CountryPicker from '../country-picker';
 import Passwords from '../passwords';
+import FieldWrapper from '../field-wrapper';
 
 function ReactHookForm(): ReactNode {
   const [nameError, setNameError] = useState('');
@@ -83,17 +84,13 @@ function ReactHookForm(): ReactNode {
       />
       <GenderPicker onChange={handleInputChange} register={register} errorMessage={genderError} />
       <CountryPicker reactHookForm={{ register, onChange: handleInputChange, errorMessage: countryError }} />
-      <div>
-        <label>
-          <p>{LABELS.image}</p>
-          <input
-            type="file"
-            accept="image/png, image/jpeg"
-            {...register('image', { onChange: () => void (async () => await handleInputChange())() })}
-          />
-        </label>
-        <p className={styles['error-message']}>{imageError}</p>
-      </div>
+      <FieldWrapper field="image" errorMessage={imageError}>
+        <input
+          type="file"
+          accept="image/png, image/jpeg"
+          {...register('image', { onChange: () => void (async () => await handleInputChange())() })}
+        />
+      </FieldWrapper>
       <div className={styles['t-and-c']}>
         <label>
           <input

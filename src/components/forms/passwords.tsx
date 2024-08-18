@@ -1,4 +1,3 @@
-import styles from './labeled-input.module.css';
 import { MutableRefObject, ReactNode } from 'react';
 import { LABELS } from '../../const';
 import { UseFormRegister } from 'react-hook-form';
@@ -23,16 +22,20 @@ function Passwords({
   return (
     <>
       {uncontrolledForm && (
-        <>
-          <LabeledInputU labelText={LABELS.password1} inputType="password" refInput={uncontrolledForm.ref.pass1} />
-          <p className={styles['error-message']}>{uncontrolledForm.errorMessage.pass1}</p>
-        </>
+        <LabeledInputU
+          labelText={LABELS.password1}
+          inputType="password"
+          refInput={uncontrolledForm.ref.pass1}
+          errorMessage={uncontrolledForm.errorMessage.pass1}
+        />
       )}
       {uncontrolledForm && (
-        <>
-          <LabeledInputU labelText={LABELS.password2} inputType="password" refInput={uncontrolledForm.ref.pass2} />
-          <p className={styles['error-message']}>{uncontrolledForm.errorMessage.pass2}</p>
-        </>
+        <LabeledInputU
+          labelText={LABELS.password2}
+          inputType="password"
+          refInput={uncontrolledForm.ref.pass2}
+          errorMessage={uncontrolledForm.errorMessage.pass2}
+        />
       )}
       {reactHookForm && (
         <LabeledInput

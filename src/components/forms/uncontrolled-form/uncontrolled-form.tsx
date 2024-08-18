@@ -9,6 +9,8 @@ import { LABELS } from '../../../const';
 import getBase64String from '../../../utils/get-base64-string';
 import CountryPicker from '../country-picker';
 import Passwords from '../passwords';
+import FieldWrapper from '../field-wrapper';
+import GenderPicker from './gender-picker';
 
 function UncontrolledForm(): ReactNode {
   const nameInput: MutableRefObject<HTMLInputElement | null> = useRef(null);
@@ -86,46 +88,24 @@ function UncontrolledForm(): ReactNode {
 
   return (
     <form className={styles.form}>
-      <div>
-        <LabeledInput labelText={LABELS.name} inputType="text" refInput={nameInput} />
-        <p className={styles['error-message']}>{nameError}</p>
-      </div>
-      <div>
-        <LabeledInput labelText={LABELS.age} inputType="number" refInput={ageInput} />
-        <p className={styles['error-message']}>{ageError}</p>
-      </div>
-      <div>
-        <LabeledInput labelText={LABELS.email} inputType="text" refInput={emailInput} />
-        <p className={styles['error-message']}>{emailError}</p>
-      </div>
+      <LabeledInput labelText={LABELS.name} refInput={nameInput} errorMessage={nameError} />
+      <LabeledInput labelText={LABELS.age} inputType="number" refInput={ageInput} errorMessage={ageError} />
+      <LabeledInput labelText={LABELS.email} refInput={emailInput} errorMessage={emailError} />
       <Passwords
         uncontrolledForm={{
           ref: { pass1: pass1Input, pass2: pass2Input },
           errorMessage: { pass1: pass1Error, pass2: pass2Error },
         }}
       />
-      <div>
-        <div className={styles.gender}>
-          <p>{LABELS.gender}</p>
-          <label>
-            <input type="radio" name="gender" value="male" ref={genderInput.male} />
-            <p>Male</p>
-          </label>
-          <label>
-            <input type="radio" name="gender" value="female" ref={genderInput.female} />
-            <p>Female</p>
-          </label>
-        </div>
-        <p className={styles['error-message']}>{genderError}</p>
-      </div>
+      <GenderPicker
+        className={styles.gender}
+        errorMessage={genderError}
+        refInput={{ male: genderInput.male, female: genderInput.female }}
+      />
       <CountryPicker uncontrolledForm={{ ref: countryInput, errorMessage: countryError }} />
-      <div>
-        <label className={styles.label}>
-          <p>{LABELS.image}</p>
-          <input type="file" accept="image/png, image/jpeg" ref={imageInput} />
-        </label>
-        <p className={styles['error-message']}>{imageError}</p>
-      </div>
+      <FieldWrapper field="image" errorMessage={imageError}>
+        <input type="file" accept="image/png, image/jpeg" ref={imageInput} />
+      </FieldWrapper>
       <div className={styles['t-and-c']}>
         <label>
           <input type="checkbox" ref={tAndCInput} />
@@ -133,7 +113,6 @@ function UncontrolledForm(): ReactNode {
         </label>
         <p className={styles['error-message']}>{tAndCError}</p>
       </div>
-
       <button type="submit" onClick={(event: React.MouseEvent) => void (async () => await handleForm(event))()}>
         Submit
       </button>
