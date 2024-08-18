@@ -4,7 +4,6 @@
 
 .header nav {
   flex-grow: 1;
-  padding: 10px;
 }
 
 .links {
@@ -12,6 +11,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 40px;
+  font-size: 1.2rem;
 }
 
 .links div {
@@ -26,6 +26,6 @@ header ul {
 
 @media screen and (width < 444px) {
   .links {
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
 }

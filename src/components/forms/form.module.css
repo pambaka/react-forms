@@ -44,3 +44,14 @@ div.gender {
 label p {
   color: var(--color-text-title);
 }
+
+.strength {
+  position: relative;
+  top: 40px;
+  right: 5px;
+  width: fit-content;
+  height: 0px;
+  align-self: flex-end;
+  font-size: 0.8rem;
+  color: gray;
+}

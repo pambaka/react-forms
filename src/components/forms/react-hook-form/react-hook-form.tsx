@@ -14,6 +14,7 @@ import Passwords from '../passwords';
 import FieldWrapper from '../field-wrapper';
 import { yupResolver } from '@hookform/resolvers/yup';
 import userSchema from '../../../validation/user-schema';
+import getPasswordStrength from '../../../utils/get-password-strength';
 
 function ReactHookForm(): ReactNode {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ function ReactHookForm(): ReactNode {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, isValid },
   } = useForm<User>({ mode: 'onChange', resolver: yupResolver(userSchema) });
 
@@ -56,6 +58,7 @@ function ReactHookForm(): ReactNode {
       <LabeledInput field="name" register={register} errorMessage={errors.name?.message ?? ''} />
       <LabeledInput field="age" register={register} errorMessage={errors.age?.message ?? ''} />
       <LabeledInput field="email" register={register} errorMessage={errors.email?.message ?? ''} />
+      <p className={styles.strength}>{getPasswordStrength(watch('password1') ?? '')}</p>
       <Passwords
         reactHookForm={{
           register,

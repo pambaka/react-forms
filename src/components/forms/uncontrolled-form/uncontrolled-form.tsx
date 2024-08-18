@@ -11,6 +11,7 @@ import CountryPicker from '../country-picker';
 import Passwords from '../passwords';
 import FieldWrapper from '../field-wrapper';
 import GenderPicker from './gender-picker';
+import getPasswordStrength from '../../../utils/get-password-strength';
 
 function UncontrolledForm(): ReactNode {
   const nameInput: MutableRefObject<HTMLInputElement | null> = useRef(null);
@@ -91,6 +92,7 @@ function UncontrolledForm(): ReactNode {
       <LabeledInput labelText={LABELS.name} refInput={nameInput} errorMessage={nameError} />
       <LabeledInput labelText={LABELS.age} inputType="number" refInput={ageInput} errorMessage={ageError} />
       <LabeledInput labelText={LABELS.email} refInput={emailInput} errorMessage={emailError} />
+      <p className={styles.strength}>{getPasswordStrength(pass1Input.current?.value ?? '')}</p>
       <Passwords
         uncontrolledForm={{
           ref: { pass1: pass1Input, pass2: pass2Input },

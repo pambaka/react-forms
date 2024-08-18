@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 import getCountries from '../utils/get-countries';
+import getPasswordErrors from '../utils/get-password-errors';
 
 const maxImageSize = 512000;
 const allowedMimeTypes = ['image/png', 'image/jpeg'];
@@ -17,7 +18,21 @@ const userSchema = Yup.object().shape({
     .positive('Age should be a positive number')
     .integer('Age should be an integer number'),
   email: Yup.string().required('Email is required').email('Please enter a valid email address'),
-  password1: Yup.string().required('Password is required'),
+  password1: Yup.string()
+    .required('Password is required')
+    .test({
+      name: '',
+      test: function (pass) {
+        const errors = getPasswordErrors(pass);
+
+        return errors.length
+          ? this.createError({
+              message: `Password should include: ${errors.join(', ')}.`,
+              path: 'password1',
+            })
+          : true;
+      },
+    }),
   password2: Yup.string()
     .required('Password is required')
     .oneOf([Yup.ref('password1')], 'Passwords do not match'),
