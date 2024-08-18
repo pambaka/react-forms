@@ -1,6 +1,6 @@
-import styles from '../labeled-input/labeled-input.module.css';
-import { LABELS } from '../../const';
-import { User, UserFields } from '../../types';
+import styles from '../../labeled-input/labeled-input.module.css';
+import { LABELS } from '../../../const';
+import { User, UserFields } from '../../../types';
 import { UseFormRegister } from 'react-hook-form';
 
 function LabeledInput({

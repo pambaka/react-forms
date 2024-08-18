@@ -1,15 +1,15 @@
-import styles from '../uncontrolled-form/form.module.css';
+import styles from '../form.module.css';
 import { useForm } from 'react-hook-form';
-import { User } from '../../types';
+import { User } from '../../../types';
 import React, { ReactNode, useState } from 'react';
-import validateForm from '../../validation/validate-form';
+import validateForm from '../../../validation/validate-form';
 import LabeledInput from './labeled-input';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { addToReactHookFormSlice } from '../../store/react-hook-form-slice';
+import { addToReactHookFormSlice } from '../../../store/react-hook-form-slice';
 import GenderPicker from './gender-picker';
-import { LABELS } from '../../const';
-import getBase64String from '../../utils/get-base64-string';
+import { LABELS } from '../../../const';
+import getBase64String from '../../../utils/get-base64-string';
 
 function ReactHookForm(): ReactNode {
   const [nameError, setNameError] = useState('');

@@ -1,12 +1,12 @@
-import styles from './form.module.css';
+import styles from '../form.module.css';
 import { MutableRefObject, ReactNode, useRef, useState } from 'react';
-import validateForm from '../../validation/validate-form';
-import LabeledInput from '../labeled-input/labeled-input';
+import validateForm from '../../../validation/validate-form';
+import LabeledInput from '../../labeled-input/labeled-input';
 import { useDispatch } from 'react-redux';
-import { addToUncontrolledFormSlice } from '../../store/uncontrolled-form-slice';
+import { addToUncontrolledFormSlice } from '../../../store/uncontrolled-form-slice';
 import { useNavigate } from 'react-router-dom';
-import { LABELS } from '../../const';
-import getBase64String from '../../utils/get-base64-string';
+import { LABELS } from '../../../const';
+import getBase64String from '../../../utils/get-base64-string';
 
 function UncontrolledForm(): ReactNode {
   const nameInput: MutableRefObject<HTMLInputElement | null> = useRef(null);

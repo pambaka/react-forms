@@ -1,8 +1,8 @@
-import styles from '../uncontrolled-form/form.module.css';
+import styles from '../form.module.css';
 import { UseFormRegister } from 'react-hook-form';
 import { ReactNode } from 'react';
-import { User } from '../../types';
-import { LABELS } from '../../const';
+import { User } from '../../../types';
+import { LABELS } from '../../../const';
 
 function GenderPicker({
   register,
