@@ -45,7 +45,7 @@ function UncontrolledForm(): ReactNode {
   const handleForm = async (event: React.MouseEvent) => {
     event.preventDefault();
     const name = nameInput.current?.value ?? '';
-    const age = ageInput.current?.value ?? '';
+    const age = Number(ageInput.current?.value);
     const email = emailInput.current?.value ?? '';
     const password1 = pass1Input.current?.value ?? '';
     const password2 = pass2Input.current?.value ?? '';
@@ -53,7 +53,7 @@ function UncontrolledForm(): ReactNode {
     const isFemale = genderInput.female.current?.checked;
     const gender = isMale ? 'male' : isFemale ? 'female' : '';
     const country = countryInput.current?.value ?? '';
-    const image = imageInput.current?.files;
+    const image = imageInput.current!.files;
     const imageBase64Str = await getBase64String(image);
     const isTCAccepted = tAndCInput.current?.checked ?? false;
     const messages = await validateForm({
@@ -79,7 +79,7 @@ function UncontrolledForm(): ReactNode {
     if (Object.values(messages).every((value) => value === '')) {
       dispatch(
         addToUncontrolledFormSlice({
-          user: { name, age, email, password: password1, gender, country, image: imageBase64Str },
+          user: { name, age: `${age}`, email, password: password1, gender, country, image: imageBase64Str },
         }),
       );
       navigate('/');

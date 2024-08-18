@@ -15,7 +15,6 @@ function Passwords({
   };
   reactHookForm?: {
     register: UseFormRegister<User>;
-    onChange: () => Promise<void>;
     errorMessage: { pass1: string; pass2: string };
   };
 }): ReactNode {
@@ -42,7 +41,6 @@ function Passwords({
           field="password1"
           type="password"
           register={reactHookForm.register}
-          onChange={reactHookForm.onChange}
           errorMessage={reactHookForm.errorMessage.pass1}
         />
       )}
@@ -51,7 +49,6 @@ function Passwords({
           field="password2"
           type="password"
           register={reactHookForm.register}
-          onChange={reactHookForm.onChange}
           errorMessage={reactHookForm.errorMessage.pass2}
         />
       )}

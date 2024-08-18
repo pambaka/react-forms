@@ -11,7 +11,10 @@ function CountryPicker({
   reactHookForm,
 }: {
   uncontrolledForm?: { ref: MutableRefObject<HTMLInputElement | null>; errorMessage: string };
-  reactHookForm?: { register: UseFormRegister<User>; onChange: () => Promise<void>; errorMessage: string };
+  reactHookForm?: {
+    register: UseFormRegister<User>;
+    errorMessage: string;
+  };
 }): ReactNode {
   const countries = useSelector<StoreRootState, string[]>((state) => state.countriesSlice.countries);
 
@@ -22,14 +25,7 @@ function CountryPicker({
       <label className={styles.label}>
         <p>{LABELS.country}</p>
         {uncontrolledForm && <input list="countries" ref={uncontrolledForm.ref} />}
-        {reactHookForm && (
-          <input
-            list="countries"
-            {...reactHookForm.register('country', {
-              onChange: () => void (async () => await reactHookForm.onChange())(),
-            })}
-          />
-        )}
+        {reactHookForm && <input list="countries" {...reactHookForm.register('country')} />}
         <datalist id="countries">
           {countries.map((country) => (
             <option value={country} key={country}></option>

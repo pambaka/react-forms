@@ -6,11 +6,9 @@ import { LABELS } from '../../../const';
 
 function GenderPicker({
   register,
-  onChange,
   errorMessage,
 }: {
   register: UseFormRegister<User>;
-  onChange: () => Promise<void>;
   errorMessage: string;
 }): ReactNode {
   return (
@@ -19,21 +17,11 @@ function GenderPicker({
         <p>{LABELS.gender}</p>
         <div className={styles.gender}>
           <label>
-            <input
-              {...register('gender', { onChange: () => void (async () => await onChange())() })}
-              type="radio"
-              name="gender"
-              value="male"
-            />
+            <input {...register('gender')} type="radio" name="gender" value="male" />
             Male
           </label>
           <label>
-            <input
-              {...register('gender', { onChange: () => void (async () => await onChange())() })}
-              type="radio"
-              name="gender"
-              value="female"
-            />
+            <input {...register('gender')} type="radio" name="gender" value="female" />
             Female
           </label>
         </div>

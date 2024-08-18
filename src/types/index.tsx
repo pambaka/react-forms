@@ -1,12 +1,12 @@
 export interface User {
   name: string;
-  age: string;
+  age: number;
   email: string;
   password1: string;
   password2: string;
   gender: string;
   country: string;
-  image: FileList | null | undefined;
+  image: FileList;
   isTCAccepted: boolean;
 }
 
