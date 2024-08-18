@@ -1,0 +1,21 @@
+.card {
+  width: min(200px, 100%);
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: var(--color-bg);
+  word-break: break-word;
+}
+
+.card p {
+  color: var(--color-text-title);
+}
+
+.card span {
+  color: var(--color-text);
+  font-style: italic;
+}
+
+img {
+  width: 100%;
+  border-radius: 5px;
+}

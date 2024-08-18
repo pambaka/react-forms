@@ -1,0 +1,9 @@
+#root {
+  width: 100vw;
+  max-width: 1280px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}

@@ -1,0 +1,31 @@
+.header {
+  display: flex;
+}
+
+.header nav {
+  flex-grow: 1;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  font-size: 1.2rem;
+}
+
+.links div {
+  display: flex;
+  gap: 20px;
+  line-height: 1.2;
+}
+
+header ul {
+  list-style: none;
+}
+
+@media screen and (width < 444px) {
+  .links {
+    font-size: 1rem;
+  }
+}

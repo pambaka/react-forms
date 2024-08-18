@@ -1,0 +1,18 @@
+.inactive {
+  color: var(--color-text-title);
+  transition: 0.5s;
+
+  &:hover {
+    color: var(--color-text-title-hover);
+  }
+}
+
+.active {
+  color: var(--color-accent);
+  pointer-events: none;
+}
+
+a {
+  font-weight: 500;
+  text-decoration: none;
+}
