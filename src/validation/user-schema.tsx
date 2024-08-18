@@ -16,15 +16,17 @@ const userSchema = Yup.object({
     .positive('Age should be a positive number')
     .integer('Age should be an integer number'),
   email: Yup.string().required('Email is required').email('Please enter a valid email address'),
+  password1: Yup.string().required('Password is required'),
+  password2: Yup.string().oneOf([Yup.ref('password1')], 'Passwords do not match'),
   gender: Yup.string().required('Choose a gender'),
   country: Yup.string()
     .required('Choose a country')
-    .test('Country is in the list', 'Please choose country from the list', (country) => {
+    .test('Country is in the list', 'Please choose a country from the list', (country) => {
       return countries.includes(country);
     }),
   image: Yup.mixed()
     .required('Please upload an image')
-    .test('Is valid type', 'Image type should be .png or .jpeg', (filesList) => {
+    .test('Is valid type', 'Image type should be image/png or image/jpeg', (filesList) => {
       if (!(0 in filesList)) return false;
       const file = filesList[0] as File;
       return allowedMimeTypes.includes(file.type);

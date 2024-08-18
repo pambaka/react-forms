@@ -1,4 +1,4 @@
-import styles from '../labeled-input/labeled-input.module.css';
+import styles from './labeled-input.module.css';
 import { MutableRefObject, ReactNode } from 'react';
 import { LABELS } from '../../const';
 import { UseFormRegister } from 'react-hook-form';

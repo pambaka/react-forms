@@ -1,4 +1,4 @@
-import styles from './labeled-input.module.css';
+import styles from '../labeled-input.module.css';
 import { MutableRefObject, ReactNode } from 'react';
 
 function LabeledInput({
@@ -7,7 +7,7 @@ function LabeledInput({
   refInput,
 }: {
   labelText: string;
-  inputType: 'text' | 'number';
+  inputType: 'text' | 'number' | 'password';
   refInput?: MutableRefObject<HTMLInputElement | null>;
 }): ReactNode {
   return (
