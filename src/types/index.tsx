@@ -3,7 +3,16 @@ export interface User {
   age: string;
   email: string;
   gender: string;
+  image: FileList | null | undefined;
   isTCAccepted: boolean;
 }
 
 export type UserFields = keyof User;
+
+export interface SliceUser {
+  name: string;
+  age: string;
+  email: string;
+  gender: string;
+  image: string;
+}

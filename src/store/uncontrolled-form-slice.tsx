@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { User } from '../types';
+import { SliceUser } from '../types';
 
-const initialState: { users: User[] } = { users: [] };
+const initialState: { users: SliceUser[] } = { users: [] };
 
 export const uncontrolledFormSlice = createSlice({
   name: 'uncontrolledForm',
   initialState,
   reducers: {
-    addToUncontrolledFormSlice(state, action: { payload: { user: User } }) {
+    addToUncontrolledFormSlice(state, action: { payload: { user: SliceUser } }) {
       const newUser = action.payload.user;
       state.users = [newUser, ...state.users];
     },

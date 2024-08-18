@@ -40,3 +40,7 @@ div.gender {
     display: flex;
   }
 }
+
+label p {
+  color: var(--color-text-title);
+}

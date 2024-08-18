@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { addToReactHookFormSlice } from '../../store/react-hook-form-slice';
 import GenderPicker from './gender-picker';
 import { LABELS } from '../../const';
+import getBase64String from '../../utils/get-base64-string';
 
 function ReactHookForm(): ReactNode {
   const [nameError, setNameError] = useState('');
@@ -16,6 +17,7 @@ function ReactHookForm(): ReactNode {
   const [emailError, setEmailError] = useState('');
   const [genderError, setGenderError] = useState('');
   const [tAndCError, setTAndCError] = useState('');
+  const [imageError, setImageError] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   const { register, getValues } = useForm<User>();
@@ -29,24 +31,23 @@ function ReactHookForm(): ReactNode {
     setAgeError(messages.age);
     setEmailError(messages.email);
     setGenderError(messages.gender);
+    setImageError(messages.image);
     setTAndCError(messages.isTCAccepted);
 
     if (Object.values(messages).every((message) => message === '')) setIsButtonDisabled(false);
     else setIsButtonDisabled(true);
   }
 
-  function handleButtonClick(event: React.MouseEvent) {
+  async function handleButtonClick(event: React.MouseEvent) {
     event.preventDefault();
     const user = getValues();
+
+    let imageBase64Str = '';
+    imageBase64Str = await getBase64String(user.image);
+
     dispatch(
       addToReactHookFormSlice({
-        user: {
-          name: user.name,
-          age: user.age,
-          email: user.email,
-          gender: user.gender,
-          isTCAccepted: user.isTCAccepted,
-        },
+        user: { name: user.name, age: user.age, email: user.email, gender: user.gender, image: imageBase64Str },
       }),
     );
     navigate('/');
@@ -58,6 +59,17 @@ function ReactHookForm(): ReactNode {
       <LabeledInput field="age" onChange={handleInputChange} register={register} errorMessage={ageError} />
       <LabeledInput field="email" onChange={handleInputChange} register={register} errorMessage={emailError} />
       <GenderPicker onChange={handleInputChange} register={register} errorMessage={genderError} />
+      <div>
+        <label>
+          <p>{LABELS.image}</p>
+          <input
+            type="file"
+            accept=".png, .jpeg"
+            {...register('image', { onChange: () => void (async () => await handleInputChange())() })}
+          />
+        </label>
+        <p className={styles['error-message']}>{imageError}</p>
+      </div>
       <div className={styles['t-and-c']}>
         <label>
           <input
@@ -68,7 +80,11 @@ function ReactHookForm(): ReactNode {
         </label>
         <p className={styles['error-message']}>{tAndCError}</p>
       </div>
-      <button type="submit" onClick={handleButtonClick} disabled={isButtonDisabled}>
+      <button
+        type="submit"
+        onClick={(event: React.MouseEvent) => void (async () => await handleButtonClick(event))()}
+        disabled={isButtonDisabled}
+      >
         Submit
       </button>
     </form>
